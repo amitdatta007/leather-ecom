@@ -4,34 +4,49 @@ import Image from "next/image";
 import Blender from '@/assets/blender.png';
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Navigation, Pagination } from "swiper/modules";
 import ProductCard from "../products/ProductCard";
+import { getProducts } from "@/actions/products";
+import getImageUrl from "@/utils/getImageUrl";
 
-const CategoryWiseProduct = () => {
+const CategoryWiseProduct = ({ category }) => {
+
+    console.log('cat', category)
 
     const [isBeginning, setIsBeginning] = useState(true);
-        const [isEnd, setIsEnd] = useState(false);
-    
-    
-        const slider = useRef(null);
-    
-        const handleNext = () => {
-            if (slider.current && slider.current.swiper) {
-                slider.current.swiper.slideNext();
-            }
-        };
-    
-        const handlePrev = () => {
-            if (slider.current && slider.current.swiper) {
-                slider.current.swiper.slidePrev();
-            }
-        };
+    const [isEnd, setIsEnd] = useState(false);
+    const [products, setProducts] = useState([]);
+
+
+    useEffect(() => {
+        getProducts({
+            categories: category?.slug
+        }).then((res) => setProducts(res?.data))
+    }, [category]);
+
+
+    const slider = useRef(null);
+
+    const handleNext = () => {
+        if (slider.current && slider.current.swiper) {
+            slider.current.swiper.slideNext();
+        }
+    };
+
+    const handlePrev = () => {
+        if (slider.current && slider.current.swiper) {
+            slider.current.swiper.slidePrev();
+        }
+    };
 
     return (
         <div className="flex w-full flex-col md:flex-row gap-14 md:gap-6">
-            <div className="w-full md:w-[25%] bg-red-400">
-                <Image alt="" src={Blender} className="w-full h-full object-cover"  />
+            <div className="w-full md:w-[25%] bg-red-400 relative">
+                <div className="absolute w-full h-full top-0 left-0 bg-black/50 grid place-content-center">
+                    <h3 className="text-center text-white text-3xl font-semibold capitalize">{category?.name}</h3>
+                </div>
+                <Image alt="" src={getImageUrl(category?.img)} width={200} height={250} className="w-full h-full object-cover" />
             </div>
             <div className="w-full md:w-[75%]">
                 <div className="flex flex-col gap-2 relative">
@@ -74,54 +89,13 @@ const CategoryWiseProduct = () => {
                                 setIsEnd(swiper.isEnd);
                             }}
                         >
-                            <SwiperSlide>
-                                <ProductCard />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <ProductCard />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <ProductCard />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <ProductCard />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <ProductCard />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <ProductCard />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <ProductCard />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <ProductCard />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <ProductCard />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <ProductCard />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <ProductCard />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <ProductCard />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <ProductCard />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <ProductCard />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <ProductCard />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <ProductCard />
-                            </SwiperSlide>
+                            {
+                                products?.map((product, i) => (
+                                    <SwiperSlide key={i}>
+                                        <ProductCard product={product} />
+                                    </SwiperSlide>
+                                ))
+                            }
                         </Swiper>
                     </div>
 

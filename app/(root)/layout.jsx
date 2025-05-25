@@ -24,7 +24,7 @@ const PublicLayout = async ({ children }) => {
             {children}
             <PoliciesOverview />
             <PaymentInfo />
-            <ShortDescription />
+            {/* <ShortDescription /> */}
             <Footer settings={settings?.data} />
         </AuthProvider>
     );

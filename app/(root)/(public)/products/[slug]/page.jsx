@@ -7,7 +7,7 @@ const SingleProductPage = async ({ params }) => {
 
 
     return (
-        <main className="mt-[185px]">
+        <main className="mt-[72px] lg:mt-[150px]">
             <SingleProduct product={product?.data} />
         </main>
     );

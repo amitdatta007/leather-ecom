@@ -35,7 +35,7 @@ export const registerUser = async (data) => {
 
         if (alreadyExist?.status === 'success') {
 
-            return { status: false, email: 'Email or phone already Exist' }
+            return { status: false, message: 'Email or phone already Exist' }
         }
 
         const newUser = {
@@ -63,7 +63,7 @@ export const registerUser = async (data) => {
     } catch (error) {
         return {
             status: false,
-            error: 'Internal Server Error!'
+            message: 'Internal Server Error!'
         }
     }
 }
@@ -94,30 +94,13 @@ export const loginUser = async (data) => {
 
         return {
             status: true,
-            message: "Sign-in successful"
+            message: "Login successful"
         };
-
-        // const user = await res.json();
-
-
-
-        // if (user?.status === 'success') {
-        //     return {
-        //         status: true,
-        //         user: user?.user
-        //     }
-        // }
-
-
-
-        // return {
-        //     status: false,
-        // }
 
     } catch (error) {
         return {
             status: false,
-            error: 'Internal Server Error!'
+            message: 'Internal Server Error!'
         }
     }
 }

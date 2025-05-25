@@ -1,6 +1,6 @@
 import Image from "next/image";
 import logo from "@/assets/logo.png";
-import { Facebook, Instagram } from "lucide-react";
+import { Facebook, Instagram, Settings } from "lucide-react";
 import Link from "next/link";
 import getImageUrl from "@/utils/getImageUrl";
 
@@ -51,43 +51,46 @@ const Footer = ({ settings }) => {
                     <div className="flex flex-col gap-6">
                         <h3 className="text-[22px] font-bold text-text-muted-50">USEFUL LINKS</h3>
                         <div className="flex flex-col gap-3">
-                            <Link className="text-white" href='/about-us'>Gift & Combo</Link>
-                            <Link className="text-white" href=''>Fashon & Lifestyle</Link>
-                            <Link className="text-white" href=''>Home Appliances</Link>
-                            <Link className="text-white" href=''>Trimmer & Gromming Kits</Link>
+                            <Link className="text-white" href='/about-us'>About Us</Link>
+                            <Link className="text-white" href=''>Contact Us</Link>
+                            <Link className="text-white" href=''>Easy Return Policy</Link>
+                            <Link className="text-white" href=''>Customer Support</Link>
+                            <Link className="text-white" href=''>EMI (Up to 36 Months)</Link>
+                            <Link className="text-white" href=''>Fast Delivery Service</Link>
+                            <Link className="text-white" href=''>Official Brand Warranty</Link>
+                            <Link className="text-white" href=''>Frequently Asked Questions</Link>
                         </div>
                     </div>
                     <div className="flex flex-col gap-6">
-                        <h3 className="text-[22px] font-bold text-text-muted-50">USEFUL LINKS</h3>
+                        <h3 className="text-[22px] font-bold text-text-muted-50">CONTACTS</h3>
                         <div className="flex flex-col gap-3">
-                            <Link className="text-white" href=''>Gift & Combo</Link>
-                            <Link className="text-white" href=''>Fashon & Lifestyle</Link>
-                            <Link className="text-white" href=''>Home Appliances</Link>
-                            <Link className="text-white" href=''>Trimmer & Gromming Kits</Link>
+                            <p className="text-white font-semibold">Address</p>
+                            <p className="text-white text-sm">{settings?.address}</p>
+                            <p className="text-white font-semibold">Phone</p>
+                            <p className="text-white text-sm">{settings?.phone}</p>
+                            <p className="text-white font-semibold">Email</p>
+                            <p className="text-white text-sm">{settings?.email}</p>
                         </div>
                     </div>
                     <div className="flex flex-col gap-6">
-                        <h3 className="text-[22px] font-bold text-text-muted-50">USEFUL LINKS</h3>
+                        <h3 className="text-[22px] font-bold text-text-muted-50">MY ACCOUNT</h3>
                         <div className="flex flex-col gap-3">
-                            <Link className="text-white" href=''>Gift & Combo</Link>
-                            <Link className="text-white" href=''>Fashon & Lifestyle</Link>
-                            <Link className="text-white" href=''>Home Appliances</Link>
-                            <Link className="text-white" href=''>Trimmer & Gromming Kits</Link>
+                            <Link className="text-white" href=''>My Account</Link>
+                            <Link className="text-white" href=''>Wishlist</Link>
+                            <Link className="text-white" href=''>Compare</Link>
+                            <Link className="text-white" href=''>Order Return</Link>
+                            <Link className="text-white" href='/cart'>Your products on Cart</Link>
                         </div>
                     </div>
                     <div className="flex flex-col gap-6">
-                        <h3 className="text-[22px] font-bold text-text-muted-50">USEFUL LINKS</h3>
+                        <h3 className="text-[22px] font-bold text-text-muted-50">BLOG LINKS</h3>
                         <div className="flex flex-col gap-3">
-                            <Link className="text-white" href=''>Gift & Combo</Link>
-                            <Link className="text-white" href=''>Fashon & Lifestyle</Link>
-                            <Link className="text-white" href=''>Home Appliances</Link>
-                            <Link className="text-white" href=''>Trimmer & Gromming Kits</Link>
                         </div>
                     </div>
                 </div>
             </section>
             <section className="py-6 bg-[#17171F]">
-                <div className="wrapper text-text-muted-25">© 2025 | Jitben | All Rights Reserved.</div>
+                <div className="wrapper text-text-muted-25">© { new Date().getFullYear() } | { settings?.site_title } | All Rights Reserved.</div>
             </section>
         </footer>
     );

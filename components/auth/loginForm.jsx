@@ -3,11 +3,15 @@
 import { loginUser } from "@/actions/authActions";
 import { Eye } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
     const [error, setError] = useState({});
+    const [isPassword, setIsPassword] = useState(true);
     const [isPending, startTransition] = useTransition();
+    const router = useRouter();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -52,12 +56,14 @@ const LoginForm = () => {
 
         startTransition(async () => {
             const result = await loginUser(data);
+
+            if (result?.status) {
+                toast.success(result?.message);
+                router.push('/');
+            } else {
+                toast.error(result?.message)
+            }
         });
-
-
-
-
-
     };
 
 
@@ -69,15 +75,21 @@ const LoginForm = () => {
                 <div className="flex flex-col gap-2">
                     <label htmlFor="email" className="text-text-primary text-[15px]">Email <span className="text-red-500">*</span></label>
                     <input type="text" id="email" name="Email" className="border-2 border-black/10 bg-transparent px-4 py-2 focus:outline-none" />
+                    <span className="text-sm text-red-500">{error?.name}</span>
                 </div>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="password" className="text-text-primary text-[15px]">Password <span className="text-red-500">*</span></label>
                     <div className="relative ">
-                        <input type="password" id="password" name="password" className="border-2 border-black/10 bg-transparent px-4 py-2 focus:outline-none w-full" />
-                        <button className="absolute right-0 px-2.5 top-1/2 -translate-y-1/2 h-full" type="button">
+                        <input type={isPassword ? 'password' : 'text'} id="password" name="password" className="border-2 border-black/10 bg-transparent px-4 py-2 focus:outline-none w-full" />
+                        <button
+                            className="absolute right-0 px-2.5 top-1/2 -translate-y-1/2 h-full"
+                            type="button"
+                            onClick={() => setIsPassword((state) => !state)}
+                        >
                             <Eye className="w-5 text-paragraph" strokeWidth={1.5} />
                         </button>
                     </div>
+                    <span className="text-sm text-red-500">{error?.password}</span>
                 </div>
                 <button type="submit" className="bg-primary text-sm font-semibold py-3 hover:bg-primary-muted text-white">LOGIN</button>
                 <div className="flex justify-end">

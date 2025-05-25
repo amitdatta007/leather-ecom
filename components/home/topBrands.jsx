@@ -6,8 +6,8 @@ import { useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import SectionTitle from "../shared/others/SectionTitle";
 import Image from "next/image";
-import brandImg from '@/assets/brand.png';
 import Link from "next/link";
+import getImageUrl from "@/utils/getImageUrl";
 
 const TopBrands = ({ brands }) => {
     const [isBeginning, setIsBeginning] = useState(true);
@@ -73,7 +73,7 @@ const TopBrands = ({ brands }) => {
                         brands?.map((brand, i) => (
                             <SwiperSlide key={i}>
                                 <Link href={`/products?brands=${brand?.slug}`} className="p-4">
-                                    <Image alt="" src={brandImg} />
+                                    <Image alt="" src={getImageUrl(brand?.img)} width={400} height={200} className="w-full aspect-[4/2]" />
                                 </Link>
                             </SwiperSlide>
                         ))

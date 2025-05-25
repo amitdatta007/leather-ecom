@@ -11,7 +11,7 @@ const SingleProduct = async ({ slug, product }) => {
 
     return (
         <>
-            <div className='wrapper flex flex-col lg:flex-row gap-4 md:gap-12 overflow-hidden '>
+            <div className='wrapper flex flex-col lg:flex-row gap-4 md:gap-12 overflow-hidden pt-10'>
                 <ProductSlider img={product?.img} />
                 <ProductInfo product={product} />
             </div>

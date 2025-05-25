@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeCart, openCart, removeFromCart } from "@/lib/app/features/cart/cartSlice";
 import Image from "next/image";
 import productImg from "@/assets/product.webp"
+import getImageUrl from "@/utils/getImageUrl";
 
 
 const Cart = ({ children }) => {
@@ -18,7 +19,7 @@ const Cart = ({ children }) => {
     const dispatch = useDispatch();
     const [isMounted, setIsMounted] = useState(false);
 
-    
+
 
     useEffect(() => {
         const sum = products.reduce((accumulator, product) => {
@@ -35,9 +36,8 @@ const Cart = ({ children }) => {
 
     return (
         <>
-            <button onClick={() => dispatch(openCart())} className="h-full grid lg:hidden place-items-center">
-                <ShoppingBag className="icon-size" />
-            </button>
+            {children}
+            
 
             <div
                 className={`fixed h-full w-full bg-[rgba(0,0,0,0.7)] top-0 left-0 z-30 animate ${isOpen ? 'visible opacity-100' : 'invisible opacity-0'}`}
@@ -62,11 +62,11 @@ const Cart = ({ children }) => {
                 {
                     products.length ? (
                         <>
-                            <div className="flex flex-col gap-2 mt-2 flex-grow">
+                            <div className="flex flex-col gap-2 mt-2 flex-grow px-4">
                                 {
                                     products?.map((product, i) => (
                                         <div key={i} className="flex gap-4 py-2 border-b">
-                                            <Image alt="" src={productImg} className="w-20 h-20" />
+                                            <Image alt="" src={getImageUrl(product?.img[0])} width={80} height={80} className="w-20 h-20" />
                                             <div className="flex-grow flex justify-between gap-2">
                                                 <div className="flex-grow flex gap-2 flex-col">
                                                     <Link href={`/products/${product?.slug}`} className="text-sm text-paragraph">{product?.title}</Link>

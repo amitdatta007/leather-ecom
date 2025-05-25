@@ -8,6 +8,7 @@ import { useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import SectionTitle from "../shared/others/SectionTitle";
 import Link from "next/link";
+import getImageUrl from "@/utils/getImageUrl";
 
 const FeatureCategories = ({ categories }) => {
     const [isBeginning, setIsBeginning] = useState(true);
@@ -74,7 +75,7 @@ const FeatureCategories = ({ categories }) => {
                         categories?.map((category, i) => (
                             <SwiperSlide key={i}>
                                 <Link href={`/products?categories=${category?.slug}`} className="p-4 border border-black/10 flex flex-col items-center gap-4 group pb-6">
-                                    <Image alt="" src={catImg} className="aspect-square w-[84px] group-hover:scale-110" />
+                                    <Image alt="" src={getImageUrl(category?.img)} width={80} height={80} className="aspect-square w-[84px] group-hover:scale-110" />
                                     <h4 className="text-xs font-bold text-center">{category?.name}</h4>
                                 </Link>
                             </SwiperSlide>

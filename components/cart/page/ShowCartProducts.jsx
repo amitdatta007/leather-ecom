@@ -1,10 +1,9 @@
-import React, { useRef, useState } from 'react';
-import productImg from "@/assets/product.webp"
 import Image from 'next/image';
 import { X } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import { decressQuantity, incressQuantity, removeFromCart } from '@/lib/app/features/cart/cartSlice';
 import Link from 'next/link';
+import getImageUrl from '@/utils/getImageUrl';
 
 const ShowCartProducts = ({ product }) => {
     const dispatch = useDispatch();
@@ -26,7 +25,7 @@ const ShowCartProducts = ({ product }) => {
                     <button className='p-2' onClick={() => dispatch(removeFromCart(product))}>
                         <X strokeWidth={1.5} size={20} />
                     </button>
-                    <Image alt='' src={productImg} className='w-20 h-20' />
+                    <Image alt='' src={getImageUrl(product?.img[0])} width={80} height={80} className='w-20 h-20' />
                     <Link href={`/products/${product?.slug}`} className='font-medium'>{product?.title}৳</Link>
                 </div>
             </td>

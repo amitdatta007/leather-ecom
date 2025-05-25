@@ -60,7 +60,7 @@ const CheckoutPage = () => {
     }
 
     return (
-        <main className=" mt-[185px] bg-[#FFFCF4] py-10">
+        <main className=" mt-[72px] lg:mt-[150px] bg-[#FFFCF4] py-10">
             <form className="wrapper flex flex-col md:flex-row gap-10" onSubmit={handleOrder}>
                 <div className="w-full">
                     <h3 className="text-2xl font-semibold uppercase">Billing details</h3>

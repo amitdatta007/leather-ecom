@@ -4,14 +4,23 @@ import Image from "next/image";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import catImg from '@/assets/cat.webp';
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import SectionTitle from "../shared/others/SectionTitle";
 import ProductCard from "../products/ProductCard";
+import { getProducts } from "@/actions/products";
 
-const ShowProductsInSlide = () => {
+const ShowProductsInSlide = ({ category }) => {
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
+    const [products, setProducts] = useState([]);
+
+
+    useEffect(() => {
+        getProducts({
+            categories: category?.slug
+        }).then((res) => setProducts(res?.data))
+    }, [category]);
 
 
     const slider = useRef(null);
@@ -31,7 +40,7 @@ const ShowProductsInSlide = () => {
     return (
         <section className="wrapper mt-10 flex flex-col gap-6">
             <div className="flex justify-between items-center">
-                <SectionTitle title='Rainy Essentials' />
+                <SectionTitle title={category?.name} />
 
                 <div className="flex">
                     <button onClick={handlePrev} disabled={isBeginning} className={isBeginning ? "opacity-50" : ""}>
@@ -70,54 +79,14 @@ const ShowProductsInSlide = () => {
                         setIsEnd(swiper.isEnd);
                     }}
                 >
-                    <SwiperSlide>
-                        <ProductCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCard />
-                    </SwiperSlide>
+
+                    {
+                        products?.map((product, i) => (
+                            <SwiperSlide key={i}>
+                                <ProductCard product={product} />
+                            </SwiperSlide>
+                        ))
+                    }
                 </Swiper>
             </div>
 

@@ -11,34 +11,31 @@ const Categories = ({ categories }) => {
     const containerRef = useRef(null);
 
     return (
-        <div className='hidden lg:block h-[54PX] w-[25%] max-w-72 relative' ref={containerRef}>
+        <div className='hidden lg:block h-[54PX] w-[25%] max-w-72 relative' ref={containerRef} onMouseEnter={() => setIsOpen(true)}
+            onMouseLeave={() => setIsOpen(false)}>
             <div
-                onClick={() => setIsOpen((state) => !state)}
-                className="flex items-center h-full text-white justify-between  bg-primary  w-full animate px-4">
+                className="flex items-center h-full text-white justify-between  bg-primary  w-full animate px-4"
+            >
                 <div className="flex items-center gap-2">
                     <AlignJustify />
                     <span className="font-medium text-sm uppercase">BROWSE CATEGORIES</span>
                 </div>
                 <ChevronDown />
             </div>
-            <div
-                className={`fixed hidden lg:block h-full w-full top-0 left-0 animate ${isOpen ? 'visible opacity-100' : 'invisible opacity-0'}`}
-                onClick={() => setIsOpen((state) => !state)}
-            />
             <div className={`absolute ${isOpen ? 'block' : 'hidden'} shadow-md w-full top-full left-0 border border-border bg-white z-40`}>
                 <div className="w-full h-full">
 
                     {
                         categories?.map((category, i) => (
                             <div className='group text-sm animate' key={i}>
-                                <button
+                                <Link
+                                    href={`/products?categories=${category?.slug}`}
                                     className="animate py-3 px-4 w-full h-full flex justify-between items-center text-sm font-medium group-hover:bg-primary group-hover:text-white"
                                 >
                                     <span>{category?.name}</span>
                                     <span>
-                                        {/* <FaAngleRight className='transition-transform duration-300 ease-out group-hover:rotate-90' /> */}
                                     </span>
-                                </button>
+                                </Link>
                                 <div className="animate absolute hidden group-hover:grid w-[720px] h-full min-h-fit left-[calc(100%_+_1px)] top-0 bg-white border-r border-b border-border grid-cols-3 2xl:grid-cols-4 p-6 gap-x-2 gap-y-5 row-auto place-content-start opacity-0 invisible group-hover:visible group-hover:opacity-100 shadow-md">
                                     {/* {
                                 category?.subcategories.map((subCat) => (<div className='flex flex-col' key={subCat.id}>

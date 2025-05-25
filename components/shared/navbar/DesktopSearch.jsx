@@ -85,7 +85,9 @@ const DesktopSearch = () => {
                         <div key={i} className="p-4 flex gap-4 hover:bg-text-muted-25 border h-fit">
                             <Image alt="" className="w-20 aspect-[4/5]" src={getImageUrl(product?.img[0])} width={400} height={500} />
                             <div className="flex flex-col gap-2">
-                                <Link className="text-sm font-medium leading-none" href={product?.slug}>{product?.title}</Link>
+                                <Link className="text-sm font-medium leading-none" href={`/products/${product?.slug}`}
+                                    onClick={() => setSearchQuery('ya')}
+                                >{product?.title}</Link>
                                 <div className='flex justify-center items-center gap-2'>
                                     {
                                         product?.sell_price && <p className='text-sm text-text-muted-50 line-through'>{product?.price}৳</p>

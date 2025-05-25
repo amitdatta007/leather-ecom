@@ -26,7 +26,7 @@ const CartPage = () => {
     if (!isMounted) return null; // or a loading spinner
 
     return (
-        <main className='mt-[185px] bg-[#FFFCF4]'>
+        <main className='mt-[72px] lg:mt-[150px] bg-[#FFFCF4]'>
             <Breadcrumb title='Cart Product' />
 
             {
